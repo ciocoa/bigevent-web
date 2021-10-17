@@ -1,14 +1,7 @@
-# bigevent
+# bigevent-web
 
-#### 介绍
+## 说明
 
-**这是一个练习仓库**
-
-#### 技术栈
-
-layui cropper quill jquery echarts
-
-#### 说明 :
-
-- 黑马大事件项目练习
+- 小白，纯属练手
+- layui cropper quill jquery echarts
 - 相关 [API 文档](https://www.showdoc.com.cn/escook)
