@@ -45,23 +45,23 @@ $(function () {
 
   // 定义 Quill 的工具栏选项
   var toolbarOptions = [
-    ['bold', 'italic', 'underline', 'strike', 'image'],        // toggled buttons
+    ['bold', 'italic', 'underline', 'strike', 'image'], // toggled buttons
     ['blockquote', 'code-block'],
 
-    [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-    [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-    [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-    [{ 'direction': 'rtl' }],                         // text direction
+    [{ header: 1 }, { header: 2 }], // custom button values
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+    [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+    [{ direction: 'rtl' }], // text direction
 
-    [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
 
-    [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-    [{ 'font': [] }],
-    [{ 'align': [] }],
+    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+    [{ font: [] }],
+    [{ align: [] }],
 
-    ['clean']                                         // remove formatting button
+    ['clean'] // remove formatting button
   ]
 
   // 初始化富文本编辑器
@@ -70,7 +70,7 @@ $(function () {
     modules: {
       // 配置工具栏
       toolbar: toolbarOptions
-    },
+    }
   })
 
   // 模拟文件选择框的点击行为
@@ -88,7 +88,7 @@ $(function () {
     // 判断用户是否选择了文件，如果没有，则 return
     if (files.length === 0) {
       // 如果没有选择封面，则把 file 重置为 null
-      return file = null
+      return (file = null)
     }
     file = files[0]
     // 如果有选择文件，则把“文件”转为“URL地址”，交给 img 标签的 src
@@ -116,10 +116,10 @@ $(function () {
     fd.append('state', state)
 
     // 2. 使用 axios 发起请求，调用发布文章的接口
-    axios.post('/my/article/add', fd).then(({ data: res }) => {
+    axios.post('/my/bigevent-web/article/add', fd).then(({ data: res }) => {
       if (res.code === 0) {
         // 跳转到文章列表页面
-        location.href = '/article/art_list.html'
+        location.href = '/bigevent-web/article/art_list.html'
         // 调用 index 页面的 highlight 函数
         window.parent.highlight('文章列表')
       }
