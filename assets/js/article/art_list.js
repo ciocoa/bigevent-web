@@ -1,4 +1,4 @@
-$(function () {
+$(() => {
   // 这个常量 q 是查询的参数对象
   const q = {
     // 页码值
@@ -13,11 +13,9 @@ $(function () {
 
   // 封装获取文章列表数据的函数
   function initArtList() {
-    axios
-      .get('/my/bigevent-web/article/list', {
-        params: q
-      })
-      .then(({ data: res }) => {
+    $.ajax({
+      url: '/my/article/list/' + q,
+      success: res => {
         if (res.code === 0) {
           // TODO：渲染表格中的数据
           const rows = []
@@ -37,25 +35,28 @@ $(function () {
         </tr>`)
           })
           $('tbody').html(rows)
-
           // 调用 renderPage 函数，渲染分页效果
           renderPage(res.total)
         }
-      })
+      }
+    })
   }
 
   initArtList()
 
   // 封装获取文章分类的函数
   function initCateList() {
-    axios.get('/my/cate/list').then(({ data: res }) => {
-      if (res.code === 0) {
-        const rows = []
-        res.data.forEach(item => {
-          rows.push(`<option value="${item.id}">${item.cate_name}</option>`)
-        })
-        $('[name="cate_id"]').append(rows)
-        layui.form.render('select')
+    $.ajax({
+      url: '/my/cate/list',
+      success: res => {
+        if (res.code === 0) {
+          const rows = []
+          res.data.forEach(item => {
+            rows.push(`<option value="${item.id}">${item.cate_name}</option>`)
+          })
+          $('[name="cate_id"]').append(rows)
+          layui.form.render('select')
+        }
       }
     })
   }
@@ -63,9 +64,8 @@ $(function () {
   initCateList()
 
   // 为筛选区域的表单绑定 submit 事件
-  $('form').on('submit', function (e) {
+  $('form').on('submit', e => {
     e.preventDefault()
-
     // 要根据用户指定的筛选条件，重新请求第 1 页的数据
     // 1. 把用户勾选的分类的 id，存储到 q.cate_id 中
     // 2. 把用户勾选的发布状态，存储到 q.state 中
@@ -78,12 +78,11 @@ $(function () {
   })
 
   // 为“重置按钮”绑定点击事件
-  $('[type="reset"]').on('click', function () {
+  $('[type="reset"]').on('click', () => {
     // 重置关键的查询参数项
     q.pagenum = 1
     q.cate_id = ''
     q.state = ''
-
     // 重新发起请求
     initArtList()
   })
@@ -99,64 +98,49 @@ $(function () {
       layout: ['count', 'limit', 'prev', 'page', 'next', 'skip'],
       // 自定义可以选择的条目数
       limits: [2, 5, 10, 15],
-      jump: function (obj, first) {
+      jump: (obj, first) => {
         //obj包含了当前分页的所有参数，比如：
         // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
         // console.log(obj.limit); //得到每页显示的条数
-
         q.pagenum = obj.curr
         q.pagesize = obj.limit
-
         //首次不执行
-        if (!first) {
-          //do something
-          initArtList()
-        }
+        if (!first) initArtList()
       }
     })
   }
 
   // 为删除按钮绑定 click 事件
-  $('tbody').on('click', '.btn-delete', function () {
+  $('tbody').on('click', '.btn-delete', () => {
     const id = $(this).attr('data-id')
-
     // 询问用户是否删除
     layer.confirm('确认删除文章吗?', { icon: 3, title: '提示' }, function (index) {
-      //do something
-      axios
-        .delete('/my/bigevent-web/article/info', {
-          params: { id }
-        })
-        .then(({ data: res }) => {
+      $.ajax({
+        type: 'delete',
+        url: '/my/article/info',
+        success: res => {
           if (res.code === 0) {
             // 1. 提示用户删除成功
             layer.msg('删除数据成功！')
-
             // 优化删除的功能，防止出现空白页面的情况
-            if (q.pagenum > 1 && $('tbody tr').length === 1) {
-              q.pagenum--
-            }
-
+            if (q.pagenum > 1 && $('tbody tr').length === 1) q.pagenum--
             // 2. 刷新列表数据
             initArtList()
           }
-        })
-
+        }
+      })
       layer.close(index)
     })
   })
 
   // 为标题的 a 链接绑定 click 事件
-  $('tbody').on('click', '.show-detail', function () {
+  $('tbody').on('click', '.show-detail', () => {
     const id = $(this).attr('data-id')
-
     // 1. 请求文章的详情数据
     // 2. 弹层展示文章的详情
-    axios
-      .get('/my/bigevent-web/article/info', {
-        params: { id }
-      })
-      .then(({ data: res }) => {
+    $.ajax({
+      url: '/my/article/info/' + id,
+      success: res => {
         if (res.code === 0) {
           // 数据获取成功！
           console.log(res)
@@ -181,6 +165,7 @@ $(function () {
           </div>`
           })
         }
-      })
+      }
+    })
   })
 })

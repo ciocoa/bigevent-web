@@ -5,9 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/bigevent-web/assets/lib/layui/css/layui.css" />
-    <link rel="stylesheet" href="/bigevent-web/assets/lib/quill/quill.snow.css" />
-    <link rel="stylesheet" href="/bigevent-web/assets/css/bigevent-web/article/art_pub.css" />
+    <link rel="stylesheet" href="../assets/lib/layui/css/layui.css" />
+    <link rel="stylesheet" href="../assets/lib/quill/quill.snow.css" />
+    <style>
+      body {
+        padding: 15px;
+      }
+      #editor {
+        min-height: 300px;
+      }
+      /* 封面容器的样式 */
+      .cover-box {
+        display: flex;
+      }
+      /* 左侧裁剪区域的样式 */
+      .cover-left {
+        width: 400px;
+        height: 280px;
+        overflow: hidden;
+        margin-right: 20px;
+      }
+      /* 右侧盒子的样式 */
+      .cover-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      /* 预览区域的样式 */
+      .img-preview {
+        width: 200px;
+        height: 140px;
+        background-color: #ccc;
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+    </style>
   </head>
 
   <body>
@@ -60,7 +92,7 @@
               <div class="cover-left">
                 <img
                   id="image"
-                  src="/bigevent-web/assets/images/sample2.jpg"
+                  src="../assets/images/sample2.jpg"
                   alt=""
                   style="width: 100%; height: 100%; object-fit: cover"
                 />
@@ -90,9 +122,9 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
-    <script src="/bigevent-web/assets/lib/layui/layui.all.js"></script>
-    <script src="/bigevent-web/assets/js/baseAPI.js"></script>
-    <script src="/bigevent-web/assets/lib/quill/quill.js"></script>
-    <script src="/bigevent-web/assets/js/bigevent-web/article/art_pub.js"></script>
+    <script src="../assets/lib/layui/layui.all.js"></script>
+    <script src="../assets/js/baseAPI.js"></script>
+    <script src="../assets/lib/quill/quill.js"></script>
+    <script src="../assets/js/article/art_pub.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-$(function () {
+$(() => {
   initCateList()
 
   /**
@@ -7,10 +7,10 @@ $(function () {
    */
   function initCateList() {
     $.ajax({
-      url: '/my/bigevent-web/article/cates',
-      success: function (response) {
+      url: '/my/article/cates',
+      success: res => {
         const rows = []
-        response.data.forEach((item, index) => {
+        res.data.forEach((item, index) => {
           rows.push(`
           <tr>
             <td>${index + 1}</td>
@@ -37,7 +37,7 @@ $(function () {
    * 监听添加分类按钮的 click 事件
    * 1. 展示弹出层
    */
-  $('#btnShowAdd').on('click', function () {
+  $('#btnShowAdd').on('click', () => {
     addIndex = layer.open({
       type: 1,
       area: ['500px', '250px'],
@@ -62,18 +62,18 @@ $(function () {
    * 2. 发送添加数据请求
    * 2.1. 成功则提示用户添加成功, 刷新分类列表, 关闭弹框
    */
-  $('body').on('submit', '#form-add', function (e) {
+  $('body').on('submit', '#form-add', e => {
     e.preventDefault()
     $.ajax({
       type: 'post',
-      url: '/my/bigevent-web/article/addcates',
+      url: '/my/article/addcates',
       data: $(this).serialize(),
-      success: function (response) {
-        if (response.status === 0) {
+      success: res => {
+        if (res.status === 0) {
           initCateList()
           layer.close(addIndex)
         }
-        layer.msg(response.message)
+        layer.msg(res.message)
       }
     })
   })
@@ -83,7 +83,7 @@ $(function () {
    * 通过代理的方式监听修改按钮的 click 事件
    * attr() 获取到的属性的值是字符串
    */
-  $('tbody').on('click', '.btn-edit', function () {
+  $('tbody').on('click', '.btn-edit', () => {
     let id = $(this).attr('data-id')
     // "修改文章分类" 弹出层
     editIndex = layer.open({
@@ -99,9 +99,9 @@ $(function () {
      * 2. 把获取到的数据，回显到表单中
      */
     $.ajax({
-      url: '/my/bigevent-web/article/cates/' + id,
-      success: function (response) {
-        if (response.status === 0) layui.form.val('form-edit', response.data)
+      url: '/my/article/cates/' + id,
+      success: res => {
+        if (res.status === 0) layui.form.val('form-edit', res.data)
       }
     })
   })
@@ -112,18 +112,18 @@ $(function () {
    * 2. 发起修改数据请求
    * 2.1. 成功则刷新列表数据, 关闭弹出层, 提示用户
    */
-  $('body').on('submit', '#form-edit', function (e) {
+  $('body').on('submit', '#form-edit', e => {
     e.preventDefault()
     $.ajax({
       type: 'post',
-      url: '/my/bigevent-web/article/updatecate',
+      url: '/my/article/updatecate',
       data: $(this).serialize(),
-      success: function (response) {
-        if (response.status === 0) {
+      success: res => {
+        if (res.status === 0) {
           initCateList()
           layer.close(editIndex)
         }
-        layer.msg(response.message)
+        layer.msg(res.message)
       }
     })
   })
@@ -131,16 +131,16 @@ $(function () {
   /**
    * 通过代理的方式监听删除按钮的 click 事件
    */
-  $('tbody').on('click', '.btn-delete', function () {
+  $('tbody').on('click', '.btn-delete', () => {
     let id = $(this).attr('data-id')
     // "是否删除" 弹出层
-    layer.confirm('是否删除?', { icon: 3, title: '提示' }, function (index) {
+    layer.confirm('是否删除?', { icon: 3, title: '提示' }, index => {
       $.ajax({
-        url: '/my/bigevent-web/article/deletecate/' + id,
-        success: function (response) {
-          if (response.status === 0) initCateList()
+        url: '/my/article/deletecate/' + id,
+        success: res => {
+          if (res.status === 0) initCateList()
           layer.close(index)
-          layer.msg(response.message)
+          layer.msg(res.message)
         }
       })
     })

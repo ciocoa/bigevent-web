@@ -6,11 +6,11 @@
     <title>大事件管理后台</title>
     <script>
       // 进入 index 页面时立即判断本地存储中有无 token, 没有就强制跳转到登录页
-      if (!localStorage.getItem('token')) location.href = '/bigevent-web/login.html'
+      if (!localStorage.getItem('token')) location.href = './login.html'
     </script>
-    <link rel="stylesheet" href="/bigevent-web/assets/lib/layui/css/layui.css" />
-    <link rel="stylesheet" href="/bigevent-web/assets/fonts/iconfont.css" />
-    <link rel="stylesheet" href="/bigevent-web/assets/css/index.css" />
+    <link rel="stylesheet" href="./assets/lib/layui/css/layui.css" />
+    <link rel="stylesheet" href="./assets/fonts/iconfont.css" />
+    <link rel="stylesheet" href="./assets/css/index.css" />
   </head>
 
   <body>
@@ -18,7 +18,7 @@
       <!-- 头部区域 -->
       <div class="layui-header">
         <div class="layui-logo layui-hide-xs layui-bg-black">
-          <img src="/bigevent-web/assets/images/logo.png" alt="" />
+          <img src="./assets/images/logo.png" alt="" />
         </div>
         <!-- 头部区域（可配合 layui 已有的水平导航） -->
         <!-- 只要元素带有 layui-nav 类名，就证明它是一个“导航” -->
@@ -26,9 +26,9 @@
           <li class="layui-nav-item layui-hide layui-show-md-inline-block">
             <a href="javascript:;" id="header-avatar"></a>
             <dl class="layui-nav-child">
-              <dd><a href="/bigevent-web/user/user_info.html" target="fm">基本资料</a></dd>
-              <dd><a href="/bigevent-web/user/user_avatar.html" target="fm">更换头像</a></dd>
-              <dd><a href="/bigevent-web/user/user_pwd.html" target="fm">重置密码</a></dd>
+              <dd><a href="./user/user_info.html" target="fm">基本资料</a></dd>
+              <dd><a href="./user/user_avatar.html" target="fm">更换头像</a></dd>
+              <dd><a href="./user/user_pwd.html" target="fm">重置密码</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item layui-hide-xs">
@@ -49,7 +49,7 @@
           <ul class="layui-nav layui-nav-tree" lay-filter="side-nav" lay-shrink="all">
             <li class="layui-nav-item layui-this">
               <!-- 一级标题 -->
-              <a href="/bigevent-web/home/dashboard.html" target="fm">
+              <a href="./home/dashboard.html" target="fm">
                 <span class="iconfont icon-home"></span>首页
               </a>
             </li>
@@ -59,17 +59,17 @@
               <!-- 二级标题 -->
               <dl class="layui-nav-child">
                 <dd>
-                  <a href="/bigevent-web/article/art_cate.html" target="fm">
+                  <a href="./article/art_cate.html" target="fm">
                     <i class="layui-icon layui-icon-app"></i>文章类别
                   </a>
                 </dd>
                 <dd>
-                  <a href="/bigevent-web/article/art_list.html" target="fm">
+                  <a href="./article/art_list.html" target="fm">
                     <i class="layui-icon layui-icon-app"></i>文章列表
                   </a>
                 </dd>
                 <dd>
-                  <a href="/bigevent-web/article/art_pub.html" target="fm">
+                  <a href="./article/art_pub.html" target="fm">
                     <i class="layui-icon layui-icon-app"></i>发表文章
                   </a>
                 </dd>
@@ -81,17 +81,17 @@
               <!-- 二级标题 -->
               <dl class="layui-nav-child">
                 <dd>
-                  <a href="/bigevent-web/user/user_info.html" target="fm">
+                  <a href="./user/user_info.html" target="fm">
                     <i class="layui-icon layui-icon-app"></i>基本资料
                   </a>
                 </dd>
                 <dd>
-                  <a href="/bigevent-web/user/user_avatar.html" target="fm">
+                  <a href="./user/user_avatar.html" target="fm">
                     <i class="layui-icon layui-icon-app"></i>更换头像
                   </a>
                 </dd>
                 <dd>
-                  <a href="/bigevent-web/user/user_pwd.html" target="fm">
+                  <a href="./user/user_pwd.html" target="fm">
                     <i class="layui-icon layui-icon-app"></i>更改密码
                   </a>
                 </dd>
@@ -106,7 +106,7 @@
         <!-- 内容主体区域 -->
         <div id="container">
           <!-- 这个 iframe 的作用：展示侧边栏对应的页面 -->
-          <iframe src="/bigevent-web/home/dashboard.html" frameborder="0" name="fm"></iframe>
+          <iframe src="./home/dashboard.html" frameborder="0" name="fm"></iframe>
         </div>
       </div>
 
@@ -118,8 +118,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery"></script>
-    <script src="/bigevent-web/assets/lib/layui/layui.all.js"></script>
-    <script src="/bigevent-web/assets/js/baseAPI.js"></script>
-    <script src="/bigevent-web/assets/js/index.js"></script>
+    <script src="./assets/lib/layui/layui.all.js"></script>
+    <script src="./assets/js/baseAPI.js"></script>
+    <script src="./assets/js/index.js"></script>
   </body>
 </html>
